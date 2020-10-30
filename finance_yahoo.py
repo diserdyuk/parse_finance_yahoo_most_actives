@@ -38,6 +38,11 @@ def get_data(html):
         except:
             price = ''
 
+        try:
+            url = 'https://finance.yahoo.com' + tds[0].find('a').get('href')
+        except:
+            url = ''
+
 
 
 
