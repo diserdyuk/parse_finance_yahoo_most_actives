@@ -66,9 +66,8 @@ def main():    # hub all functions
         
         for tr in trs:   # cycle for stop parser
             cnt_symbol += 1
-            print(cnt_symbol)
         
-        if cnt_symbol == 223:
+        if cnt_symbol == 223:    # 223 its end symbol on pages
             break
 
         try:    # if page none, catche except 
