@@ -52,13 +52,21 @@ def get_data(html):    # func.parse html code
         write_csv(data)    # write parse data in csv
 
 
-
-
 def main():    # hub all functions
-    url = 'https://finance.yahoo.com/most-active'
-    get_data(get_html(url))
+    url = 'https://finance.yahoo.com/most-active?count=25&offset=0'
+
+    cnt_page = 0   # count pages, +25 
+    while True:    # cycle for parse each page        
+        get_data(get_html(url))
+        cnt_page += 25 
+
+        try:    # if page none, catche except 
+            url = 'https://finance.yahoo.com/most-active?count=25&offset=' + str(cnt_page)    # 2nd var can use method format
+        except:
+            break    
 
 
 
 if __name__ == '__main__':
     main()
+
