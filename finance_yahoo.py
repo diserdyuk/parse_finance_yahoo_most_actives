@@ -54,17 +54,28 @@ def get_data(html):    # func.parse html code
 
 def main():    # hub all functions
     url = 'https://finance.yahoo.com/most-active?count=25&offset=0'
-
+     
+    cnt_symbol = 0 
     cnt_page = 0   # count pages, +25 
     while True:    # cycle for parse each page        
         get_data(get_html(url))
         cnt_page += 25 
 
+        soup = BeautifulSoup(get_html(url), 'lxml')
+        trs = soup.find('table').find('tbody').find_all('tr')
+        
+        for tr in trs:   # cycle for stop parser
+            cnt_symbol += 1
+            print(cnt_symbol)
+        
+        if cnt_symbol == 223:
+            break
+
         try:    # if page none, catche except 
             url = 'https://finance.yahoo.com/most-active?count=25&offset=' + str(cnt_page)    # 2nd var can use method format
         except:
-            break    
-
+            break 
+       
 
 
 if __name__ == '__main__':
